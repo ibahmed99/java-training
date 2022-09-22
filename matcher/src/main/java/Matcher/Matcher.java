@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Matcher {
 
-    public Matcher(Order newOrder) {
-
-    }
+//    public Matcher(Order newOrder) {
+//
+//    }
 
     public static void matchNewOrder(Order newOrder, Orderbook existingOrders, ArrayList<Trade> trades) {
         if (newOrder.action.equals("buy")) {
@@ -28,7 +28,12 @@ public class Matcher {
     }
 
     private static void processNewSell(Order newOrder, Orderbook existingOrders, ArrayList<Trade> trades) {
-
+        ArrayList<MarketUpdate> marketUpdates = pairNewSell(newOrder, existingOrders, trades);
+        if (marketUpdates.size() == 0) {
+            existingOrders.sells.add(newOrder);
+        } else {
+            updateBuyMarket(marketUpdates, existingOrders);
+        }
     }
 
     private static ArrayList<MarketUpdate> pairNewBuy(Order newOrder, Orderbook existingOrders, ArrayList<Trade> trades) {
@@ -39,7 +44,7 @@ public class Matcher {
 
             boolean buyHigherThanSell = newOrder.price >= existingSell.price;
             boolean notSameAccount = !(newOrder.getAccount().equals(existingSell.getAccount()));
-            boolean notSameCoin = !(newOrder.coin.equals(existingSell.coin));
+            boolean notSameCoin = newOrder.coin.equals(existingSell.coin);
 
             if (buyHigherThanSell && notSameAccount && notSameCoin) {
                 MarketUpdate update = newTrade(newOrder, existingSell, trades);
@@ -51,8 +56,24 @@ public class Matcher {
         return marketUpdates;
     }
 
-    private static void pairNewSell(Order newOrder, Orderbook existingOrders) {
+    private static ArrayList<MarketUpdate> pairNewSell(Order newOrder, Orderbook existingOrders, ArrayList<Trade> trades) {
+        ArrayList<MarketUpdate> marketUpdates = new ArrayList<MarketUpdate>();
+        ArrayList<Order> existingBuys = existingOrders.buys;
+        for (Order existingBuy : existingBuys) {
+            boolean buyHigherThanSell = newOrder.price <= existingBuy.price;
+            boolean notSameAccount = !(newOrder.getAccount().equals(existingBuy.getAccount()));
+            boolean sameCoin = newOrder.coin.equals(existingBuy.coin);
 
+            if (buyHigherThanSell && notSameAccount && sameCoin) {
+                MarketUpdate update = newTrade(newOrder, existingBuy, trades);
+
+                if (update.deleteOldOrder) newOrder = update.newOrder;
+                marketUpdates.add(update);
+
+                if (!update.deleteOldOrder) return marketUpdates;
+            }
+        }
+        return marketUpdates;
     }
 
     private static MarketUpdate newTrade(Order newOrder, Order existingOrder, ArrayList<Trade> trades) {
@@ -84,15 +105,21 @@ public class Matcher {
     }
 
     private static void updateSellMarket(ArrayList<MarketUpdate> marketUpdates, Orderbook existingOrders) {
-
+        for (int i = 0; i < marketUpdates.size(); i++) {
+            updateMarket(marketUpdates.get(i), existingOrders.buys);
+            if (i == marketUpdates.size() - 1 && marketUpdates.get(i).deleteOldOrder) {
+                existingOrders.buys.add(marketUpdates.get(i).newOrder);
+            }
+        }
     }
 
     private static void updateBuyMarket(ArrayList<MarketUpdate> marketUpdates, Orderbook existingOrders) {
-
-    }
-
-    private static void removeZeroQuantOrders(Orderbook existingOrders) {
-        // remove orders with zero quantity
+        for (int i = 0; i < marketUpdates.size(); i++) {
+            updateMarket(marketUpdates.get(i), existingOrders.buys);
+            if (i == marketUpdates.size() - 1 && marketUpdates.get(i).deleteOldOrder) {
+                existingOrders.sells.add(marketUpdates.get(i).newOrder);
+            }
+        }
     }
 
     private static void updateMarket(MarketUpdate marketUpdate, ArrayList<Order> existingOrderList) {
@@ -110,6 +137,12 @@ public class Matcher {
     private static void updateExistingMarketOrder(MarketUpdate marketUpdate, ArrayList<Order> existingOrderList) {
         int orderIndex = existingOrderList.indexOf(marketUpdate.oldOrder);
         existingOrderList.set(orderIndex, marketUpdate.newOrder);
+    }
+
+    private static void removeZeroQuantOrders(Orderbook existingOrders) {
+        // remove orders with zero quantity
+        existingOrders.sells.removeIf(order -> order.quantity == 0);
+        existingOrders.buys.removeIf(order -> order.quantity == 0);
     }
 
     public static void main(String[] args) {
