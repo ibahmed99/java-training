@@ -1,15 +1,19 @@
 package Matcher;
 
-public class Trade {
+public class Trade implements Comparable<Trade> {
     double quantity;
     double price;
-    int time;
+    long time;
     String coin;
     String id;
 
-    public Trade(double quantity, double price, int time, String coin) {
-        this.price = price;
-        this.quantity = quantity;
-        this.time = time;
+    public Trade(String coin) {
+        this.coin = coin;
+        this.time = System.currentTimeMillis();
+    }
+
+    @Override
+    public int compareTo(Trade otherTrade) {
+        return Long.compare(time, otherTrade.time);
     }
 }
