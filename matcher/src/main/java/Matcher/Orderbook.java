@@ -32,4 +32,13 @@ public class Orderbook {
         Collections.sort(this.sells);
         Collections.reverse(this.sells);
     }
+
+    public void addOrder(Order order) {
+        if (order.action.equals("buy")) {
+            this.buys.add(order);
+        } else {
+            this.sells.add(order);
+        }
+        this.sortLists();
+    }
 }

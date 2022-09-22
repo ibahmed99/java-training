@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 public class Matcher {
 
-//    public Matcher(Order newOrder) {
-//
-//    }
-
     public static void matchNewOrder(Order newOrder, Orderbook existingOrders, ArrayList<Trade> trades) {
         if (newOrder.action.equals("buy")) {
             processNewBuy(newOrder, existingOrders, trades);
