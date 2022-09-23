@@ -40,5 +40,19 @@ public class Orderbook {
             this.sells.add(order);
         }
         this.sortLists();
+        return;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Orderbook orderbook = (Orderbook) obj;
+        if (this.buys.size() != orderbook.buys.size() || this.sells.size() != orderbook.sells.size()) return false;
+        for (int i = 0; i < orderbook.buys.size(); i++) {
+            if (!(this.buys.get(i).equals(orderbook.buys.get(i)))) return false;
+        }
+        for (int i = 0; i < orderbook.sells.size(); i++) {
+            if (!(this.sells.get(i).equals(orderbook.sells.get(i)))) return false;
+        }
+        return true;
     }
 }

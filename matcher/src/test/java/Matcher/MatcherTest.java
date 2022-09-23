@@ -13,10 +13,32 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MatcherTest {
 
+    ArrayList<Trade> trades;
     private Orderbook existingOrders;
+    private Order sellOrder1;
+    private Order sellOrder2;
+    private Order buyOrder1;
+    private long time;
+    private Trade trade1;
 
     @BeforeEach
     void setUp() {
+        time = System.currentTimeMillis();
+
+        existingOrders = new Orderbook();
+        sellOrder1 = new Order("1", 10, 20, "sell", time, "BTC");
+        sellOrder2 = new Order("3", 30, 10, "sell", time, "BTC");
+        buyOrder1 = new Order("2", 20, 5, "buy", time, "BTC");
+
+        existingOrders.addOrder(sellOrder1);
+        existingOrders.addOrder(sellOrder2);
+        existingOrders.addOrder(buyOrder1);
+
+        trade1 = new Trade("BTC");
+        trade1.price = 25;
+        trade1.quantity = 10;
+        trades = new ArrayList<Trade>();
+        trades.add(trade1);
     }
 
     @AfterEach
@@ -24,21 +46,7 @@ class MatcherTest {
     }
 
     @Test
-    void matcherTest1() {
-        long time = System.currentTimeMillis();
-        Order sellOrder1 = new Order("1", 10, 20, "sell", time, "BTC");
-        Order sellOrder2 = new Order("3", 30, 10, "sell", time, "BTC");
-        Order buyOrder1 = new Order("2", 20, 5, "buy", time, "BTC");
-        existingOrders = new Orderbook();
-        existingOrders.addOrder(sellOrder1);
-        existingOrders.addOrder(sellOrder2);
-        existingOrders.addOrder(buyOrder1);
-
-        Trade trade1 = new Trade("BTC");
-        trade1.price = 25;
-        trade1.quantity = 10;
-        ArrayList<Trade> trades = new ArrayList<Trade>();
-        trades.add(trade1);
+    void matcherWorksWithSellOrder() {
 
         Order newOrder = new Order("4", 15, 15, "sell", time, "BTC");
 
@@ -51,14 +59,97 @@ class MatcherTest {
         newExistingOrders.addOrder(sellOrder2);
         newExistingOrders.addOrder(newSellOrder3);
 
-        assertEquals(existingOrders.buys.size(), newExistingOrders.buys.size());
-        assertEquals(existingOrders.sells.size(), newExistingOrders.sells.size());
+        assertEquals(existingOrders, newExistingOrders);
+    }
 
+    @Test
+    void matcherWorksWithBuyOrder() {
+        Order newOrder = new Order("4", 25, 10, "buy", time, "BTC");
 
-        for (int i = 0; i < existingOrders.buys.size(); i++) {
-            assertThat(existingOrders.buys.get(i)).isEqualToComparingFieldByFieldRecursively(newExistingOrders.buys.get(i));
-        }
-        assertEquals(existingOrders.buys, newExistingOrders.buys);
-        assertEquals(existingOrders.sells, newExistingOrders.sells);
+        Matcher.matchNewOrder(newOrder, existingOrders, trades);
+
+        Order newSellOrder1 = new Order("1", 10, 10, "sell", time, "BTC");
+        Orderbook newExistingOrders = new Orderbook();
+        newExistingOrders.addOrder(newSellOrder1);
+        newExistingOrders.addOrder(sellOrder2);
+        newExistingOrders.addOrder(buyOrder1);
+
+        assertEquals(existingOrders, newExistingOrders);
+    }
+
+    @Test
+    void buyOrderWithSameQuantityAsExistingSellOrderFulfills() {
+        Order newOrder = new Order("4", 15, 20, "buy", time, "BTC");
+
+        Matcher.matchNewOrder(newOrder, existingOrders, trades);
+
+        Orderbook newExistingOrders = new Orderbook();
+        newExistingOrders.addOrder(sellOrder2);
+        newExistingOrders.addOrder(buyOrder1);
+
+        assertEquals(existingOrders, newExistingOrders);
+    }
+
+    @Test
+    void sellOrderWithSameQuantityAsExistingBuyOrderFulfills() {
+        long time2 = System.currentTimeMillis();
+
+        Order newOrder = new Order("4", 15, 5, "sell", time2, "BTC");
+
+        Matcher.matchNewOrder(newOrder, existingOrders, trades);
+
+        Orderbook newExistingOrders = new Orderbook();
+        newExistingOrders.addOrder(sellOrder1);
+        newExistingOrders.addOrder(sellOrder2);
+
+        assertEquals(existingOrders, newExistingOrders);
+    }
+
+    @Test
+    void buyOrderTradesWithMultipleSellOrdersDoesNotFulfill() {
+        long time2 = System.currentTimeMillis();
+
+        Order newOrder = new Order("4", 35, 35, "buy", time2, "BTC");
+
+        Matcher.matchNewOrder(newOrder, existingOrders, trades);
+
+        Order buyOrder2 = new Order("4", 35, 5, "buy", time2, "BTC");
+
+        Orderbook newExistingOrders = new Orderbook();
+        newExistingOrders.addOrder(buyOrder1);
+        newExistingOrders.addOrder(buyOrder2);
+//        System.out.println(existingOrders.sells);
+//        System.out.println(existingOrders.buys);
+//        System.out.println(newExistingOrders.sells);
+//        System.out.println(newExistingOrders.buys);
+
+        assertEquals(existingOrders, newExistingOrders);
+    }
+
+    @Test
+    void sellOrderTradesWithMultipleBuyOrdersFulfills() {
+        long time2 = System.currentTimeMillis();
+
+        existingOrders = new Orderbook();
+        existingOrders.addOrder(sellOrder1);
+        existingOrders.addOrder(buyOrder1);
+
+        Order buyOrder2 = new Order("3", 30, 10, "buy", time, "BTC");
+        existingOrders.addOrder(buyOrder2);
+
+        Order newOrder = new Order("4", 15, 12, "sell", time2, "BTC");
+
+        Matcher.matchNewOrder(newOrder, existingOrders, trades);
+
+        Orderbook newExistingOrders = new Orderbook();
+        newExistingOrders.addOrder(sellOrder1);
+        newExistingOrders.addOrder(new Order("2", 20, 3, "buy", time, "BTC"));
+
+        System.out.println(existingOrders.sells);
+        System.out.println(existingOrders.buys);
+        System.out.println(newExistingOrders.sells);
+        System.out.println(newExistingOrders.buys);
+
+        assertEquals(existingOrders, newExistingOrders);
     }
 }

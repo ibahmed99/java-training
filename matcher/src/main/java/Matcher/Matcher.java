@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Matcher {
 
     public static void matchNewOrder(Order newOrder, Orderbook existingOrders, ArrayList<Trade> trades) {
+        existingOrders.sortLists();
         if (newOrder.action.equals("buy")) {
             processNewBuy(newOrder, existingOrders, trades);
         } else {
@@ -12,6 +13,7 @@ public class Matcher {
         }
 
         removeZeroQuantOrders(existingOrders);
+        existingOrders.sortLists();
     }
 
     private static void processNewBuy(Order newOrder, Orderbook existingOrders, ArrayList<Trade> trades) {
@@ -102,7 +104,7 @@ public class Matcher {
 
     private static void updateSellMarket(ArrayList<MarketUpdate> marketUpdates, Orderbook existingOrders) {
         for (int i = 0; i < marketUpdates.size(); i++) {
-            updateMarket(marketUpdates.get(i), existingOrders.buys);
+            updateMarket(marketUpdates.get(i), existingOrders.sells);
             if (i == marketUpdates.size() - 1 && marketUpdates.get(i).deleteOldOrder) {
                 existingOrders.buys.add(marketUpdates.get(i).newOrder);
             }
@@ -135,7 +137,7 @@ public class Matcher {
         existingOrderList.set(orderIndex, marketUpdate.newOrder);
     }
 
-    private static void removeZeroQuantOrders(Orderbook existingOrders) {
+    public static void removeZeroQuantOrders(Orderbook existingOrders) {
         // remove orders with zero quantity
         existingOrders.sells.removeIf(order -> order.quantity == 0);
         existingOrders.buys.removeIf(order -> order.quantity == 0);

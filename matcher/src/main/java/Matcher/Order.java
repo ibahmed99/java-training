@@ -31,4 +31,19 @@ public class Order implements Comparable<Order> {
     public int compareTo(Order otherOrder) {
         return Double.compare(price, otherOrder.price);
     }
+
+    @Override
+    public String toString() {
+        return account + ":" + price + ":" + quantity + ":" + action;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Order order = (Order) obj;
+        if (order.price == this.price && order.quantity == this.quantity && order.action.equals(this.action) && order.account.equals(this.account) && order.time == this.time) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
