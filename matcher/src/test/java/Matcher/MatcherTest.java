@@ -137,7 +137,9 @@ class MatcherTest {
         Order buyOrder2 = new Order("3", 30, 10, "buy", time, "BTC");
         existingOrders.addOrder(buyOrder2);
 
+
         Order newOrder = new Order("4", 15, 12, "sell", time2, "BTC");
+        existingOrders.sortLists();
 
         Matcher.matchNewOrder(newOrder, existingOrders, trades);
 
@@ -145,10 +147,72 @@ class MatcherTest {
         newExistingOrders.addOrder(sellOrder1);
         newExistingOrders.addOrder(new Order("2", 20, 3, "buy", time, "BTC"));
 
-        System.out.println(existingOrders.sells);
-        System.out.println(existingOrders.buys);
-        System.out.println(newExistingOrders.sells);
-        System.out.println(newExistingOrders.buys);
+        assertEquals(existingOrders, newExistingOrders);
+    }
+
+    @Test
+    void buyOrderTradesWithMultipleSellOrdersFulfills() {
+        long time2 = System.currentTimeMillis();
+
+        Order newOrder = new Order("4", 35, 25, "buy", time2, "BTC");
+
+        Matcher.matchNewOrder(newOrder, existingOrders, trades);
+
+        Orderbook newExistingOrders = new Orderbook();
+        newExistingOrders.addOrder(new Order("3", 30, 5, "sell", time, "BTC"));
+        newExistingOrders.addOrder(new Order("2", 20, 5, "buy", time, "BTC"));
+
+        assertEquals(existingOrders, newExistingOrders);
+    }
+
+    @Test
+    void sellOrderTradesWithMultipleBuyOrdersDoesNotFulfill() {
+        long time2 = System.currentTimeMillis();
+
+        Order newOrder = new Order("4", 15, 20, "sell", time2, "BTC");
+
+        Orderbook existingOrders = new Orderbook();
+        existingOrders.addOrder(sellOrder1);
+        existingOrders.addOrder(buyOrder1);
+        existingOrders.addOrder(new Order("3", 30, 10, "buy", time, "BTC"));
+
+        Matcher.matchNewOrder(newOrder, existingOrders, trades);
+
+        Orderbook newExistingOrders = new Orderbook();
+        newExistingOrders.addOrder(sellOrder1);
+        newExistingOrders.addOrder(new Order("4", 15, 5, "sell", time2, "BTC"));
+
+        assertEquals(existingOrders, newExistingOrders);
+    }
+
+    @Test
+    void removingZeroQuantBuyOrder() {
+
+        existingOrders.addOrder(new Order("4", 20, 0, "buy", time, "BTC"));
+
+        Matcher.removeZeroQuantOrders(existingOrders);
+
+        Orderbook newExistingOrders = new Orderbook();
+
+        newExistingOrders.addOrder(sellOrder1);
+        newExistingOrders.addOrder(sellOrder2);
+        newExistingOrders.addOrder(buyOrder1);
+
+        assertEquals(existingOrders, newExistingOrders);
+    }
+
+    @Test
+    void removingZeroQuantSellOrder() {
+
+        existingOrders.addOrder(new Order("4", 20, 0, "sell", time, "BTC"));
+
+        Matcher.removeZeroQuantOrders(existingOrders);
+
+        Orderbook newExistingOrders = new Orderbook();
+
+        newExistingOrders.addOrder(sellOrder1);
+        newExistingOrders.addOrder(sellOrder2);
+        newExistingOrders.addOrder(buyOrder1);
 
         assertEquals(existingOrders, newExistingOrders);
     }

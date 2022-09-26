@@ -30,7 +30,7 @@ public class Orderbook {
     public void sortLists() {
         Collections.sort(this.buys);
         Collections.sort(this.sells);
-        Collections.reverse(this.sells);
+        Collections.reverse(this.buys);
     }
 
     public void addOrder(Order order) {
