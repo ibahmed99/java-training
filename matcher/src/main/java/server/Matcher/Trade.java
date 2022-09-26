@@ -1,4 +1,4 @@
-package Matcher;
+package server.Matcher;
 
 public class Trade implements Comparable<Trade> {
     double quantity;

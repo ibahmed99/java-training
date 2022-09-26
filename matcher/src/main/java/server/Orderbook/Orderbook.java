@@ -1,4 +1,4 @@
-package Matcher;
+package server.Orderbook;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,16 +13,6 @@ public class Orderbook {
     }
 
     public ArrayList<Order> getPrivateBuybook() {
-        this.sortLists();
-        return this.buys;
-    }
-
-    public ArrayList<Order> getSellbook() {
-        this.sortLists();
-        return this.sells;
-    }
-
-    public ArrayList<Order> getBuybook() {
         this.sortLists();
         return this.buys;
     }

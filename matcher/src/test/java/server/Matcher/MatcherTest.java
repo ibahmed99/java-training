@@ -1,18 +1,16 @@
-package Matcher;
+package server.Matcher;
 
+import server.Matcher.*;
+import server.Orderbook.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MatcherTest {
-
     ArrayList<Trade> trades;
     private Orderbook existingOrders;
     private Order sellOrder1;

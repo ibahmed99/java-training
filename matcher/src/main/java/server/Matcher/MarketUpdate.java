@@ -1,4 +1,6 @@
-package Matcher;
+package server.Matcher;
+
+import server.Orderbook.Order;
 
 public class MarketUpdate {
     boolean deleteOldOrder;

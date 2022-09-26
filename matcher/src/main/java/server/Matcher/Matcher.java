@@ -1,4 +1,6 @@
-package Matcher;
+package server.Matcher;
+
+import server.Orderbook.*;
 
 import java.util.ArrayList;
 
@@ -36,13 +38,13 @@ public class Matcher {
 
     private static ArrayList<MarketUpdate> pairNewBuy(Order newOrder, Orderbook existingOrders, ArrayList<Trade> trades) {
         ArrayList<MarketUpdate> marketUpdates = new ArrayList<MarketUpdate>();
-        ArrayList<Order> existingSells = existingOrders.getSellbook();
+        ArrayList<Order> existingSells = existingOrders.sells;
 
         for (Order existingSell : existingSells) {
 
             boolean buyHigherThanSell = newOrder.price >= existingSell.price;
             boolean notSameAccount = !(newOrder.getAccount().equals(existingSell.getAccount()));
-            boolean notSameCoin = newOrder.coin.equals(existingSell.coin);
+            boolean notSameCoin = newOrder.getCoin().equals(existingSell.getCoin());
 
             if (buyHigherThanSell && notSameAccount && notSameCoin) {
                 MarketUpdate update = newTrade(newOrder, existingSell, trades);

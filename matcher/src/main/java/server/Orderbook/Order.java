@@ -1,13 +1,13 @@
-package Matcher;
+package server.Orderbook;
 
 public class Order implements Comparable<Order> {
-    final double price;
-    final String action;
-    final long time;
+    final public double price;
+    final public String action;
+    final public long time;
     //    final String id; needs to be randomly generated
     final private String account;
-    double quantity;
-    String coin = "BTC";
+    public double quantity;
+    public String coin = "BTC";
 
 
     public Order(String account, double price, double quantity, String action, long time, String coin) {
@@ -27,6 +27,26 @@ public class Order implements Comparable<Order> {
         return this.account;
     }
 
+    public double getPrice() {
+        return this.price;
+    }
+
+    public double getQuantity() {
+        return this.quantity;
+    }
+
+    public String getAction() {
+        return this.action;
+    }
+
+    public long getTime() {
+        return this.time;
+    }
+
+    public String getCoin() {
+        return this.coin;
+    }
+
     @Override
     public int compareTo(Order otherOrder) {
         return Double.compare(price, otherOrder.price);
@@ -34,7 +54,13 @@ public class Order implements Comparable<Order> {
 
     @Override
     public String toString() {
-        return account + ":" + price + ":" + quantity + ":" + action;
+        return "Order{" +
+                "price=" + price +
+                ", action='" + action + '\'' +
+                ", time=" + time +
+                ", quantity=" + quantity +
+                ", coin='" + coin + '\'' +
+                '}';
     }
 
     @Override
