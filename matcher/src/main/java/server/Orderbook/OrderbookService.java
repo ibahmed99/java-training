@@ -11,9 +11,9 @@ public class OrderbookService {
     @Autowired
     private MatcherApplication matcherApplication;
 
-    public Orderbook getOrderbook() {
+    public PrivateOrderbook getPrivateOrderbook() {
 
-        return matcherApplication.getExistingOrders();
+        return matcherApplication.getPrivateExistingOrders();
     }
 
     public void processNewOrder(Order newOrder) {

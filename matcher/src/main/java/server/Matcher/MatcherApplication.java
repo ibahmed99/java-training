@@ -20,6 +20,10 @@ public class MatcherApplication {
         return this.existingOrders;
     }
 
+    public PrivateOrderbook getPrivateExistingOrders() {
+        return this.existingOrders.privatiseOrderbook();
+    }
+
     public ArrayList<Trade> getTrades() {
         return trades;
     }

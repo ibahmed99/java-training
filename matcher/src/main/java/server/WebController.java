@@ -8,7 +8,7 @@ public class WebController {
 
     @GetMapping
     public String greeting() {
-        return "hello";
+        return "hello CoinFake user";
     }
 
 }

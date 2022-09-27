@@ -7,16 +7,6 @@ public class Orderbook {
     public ArrayList<Order> buys = new ArrayList<Order>();
     public ArrayList<Order> sells = new ArrayList<Order>();
 
-    public ArrayList<Order> getPrivateSellbook() {
-        this.sortLists();
-        return this.sells;
-    }
-
-    public ArrayList<Order> getPrivateBuybook() {
-        this.sortLists();
-        return this.buys;
-    }
-
     public void sortLists() {
         Collections.sort(this.buys);
         Collections.sort(this.sells);
@@ -31,6 +21,12 @@ public class Orderbook {
         }
         this.sortLists();
         return;
+    }
+
+    public PrivateOrderbook privatiseOrderbook() {
+        PrivateOrderbook privateOrderbook = new PrivateOrderbook(this.sells, this.buys);
+        privateOrderbook.sortLists();
+        return privateOrderbook;
     }
 
     @Override

@@ -18,13 +18,13 @@ public class OrderbookController {
     }
 
     @GetMapping
-    public Orderbook getOrderbook() {
-        return orderbookService.getOrderbook();
+    public PrivateOrderbook getOrderbook() {
+        return orderbookService.getPrivateOrderbook();
     }
 
     @PostMapping
-    public Orderbook processNewOrder(@RequestBody Order newOrder) {
+    public PrivateOrderbook processNewOrder(@RequestBody Order newOrder) {
         orderbookService.processNewOrder(newOrder);
-        return matcherApplication.getExistingOrders();
+        return matcherApplication.getPrivateExistingOrders();
     }
 }
