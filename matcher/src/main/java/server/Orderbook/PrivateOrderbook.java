@@ -23,4 +23,12 @@ public class PrivateOrderbook {
         Collections.sort(this.sells);
         Collections.reverse(this.buys);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"buys\":" + buys +
+                ",\"sells\":" + sells +
+                '}';
+    }
 }

@@ -7,6 +7,14 @@ public class Orderbook {
     public ArrayList<Order> buys = new ArrayList<Order>();
     public ArrayList<Order> sells = new ArrayList<Order>();
 
+    public Orderbook() {
+    }
+
+    public Orderbook(ArrayList<Order> buys, ArrayList<Order> sells) {
+        this.buys = buys;
+        this.sells = sells;
+    }
+
     public void sortLists() {
         Collections.sort(this.buys);
         Collections.sort(this.sells);
@@ -27,6 +35,14 @@ public class Orderbook {
         PrivateOrderbook privateOrderbook = new PrivateOrderbook(this.sells, this.buys);
         privateOrderbook.sortLists();
         return privateOrderbook;
+    }
+
+    public Orderbook clone() {
+        ArrayList<Order> clonedBuys = new ArrayList<Order>();
+        ArrayList<Order> clonedSells = new ArrayList<Order>();
+        for (Order buy : this.buys) clonedBuys.add(buy.clone());
+        for (Order sell : this.sells) clonedSells.add(sell.clone());
+        return new Orderbook(clonedBuys, clonedSells);
     }
 
     @Override

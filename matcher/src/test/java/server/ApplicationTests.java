@@ -34,7 +34,9 @@ class ApplicationTests {
 
     @Test
     public void gettingOrderbookShouldReturnCorrectJSON() throws Exception {
-
+        PrivateOrderbook expectedJSON = (new Orderbook()).privatiseOrderbook();
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/api/v1/order",
+                String.class)).contains("" + expectedJSON + "");
     }
 
 }
