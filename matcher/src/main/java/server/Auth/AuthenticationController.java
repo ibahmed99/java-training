@@ -19,7 +19,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody @Valid LoginCredentials loginCredentials) {
+    public ResponseEntity<String> login(@RequestBody @Valid InputCredentials loginCredentials) {
         return ResponseEntity.ok(authenticationService.authenticateUserCredentials(loginCredentials));
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<String> signup(@RequestBody @Valid InputCredentials signupCredentials) {
+        
+        return ResponseEntity.ok("ok");
     }
 }

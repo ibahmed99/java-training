@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
-public class LoginCredentials {
+public class InputCredentials {
     @NotBlank
     @NotNull
     @Pattern(regexp = "^[\\S]+$", message = "no spaces")
@@ -15,7 +15,7 @@ public class LoginCredentials {
     @Pattern(regexp = "^[\\S]+$", message = "no spaces")
     String password;
 
-    public LoginCredentials(String username, String password) {
+    public InputCredentials(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -31,8 +31,8 @@ public class LoginCredentials {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof LoginCredentials)) return false;
-        LoginCredentials that = (LoginCredentials) o;
+        if (!(o instanceof InputCredentials)) return false;
+        InputCredentials that = (InputCredentials) o;
         return username.equals(that.username) && password.equals(that.password);
     }
 
