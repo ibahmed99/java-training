@@ -6,8 +6,8 @@ import javax.persistence.*;
 
 @Entity
 @Table
-@Getter
-@Setter
+@AllArgsConstructor(staticName = "build")
+@NoArgsConstructor
 public class Account {
     @Id
     @Column(name = "USERNAME")

@@ -1,0 +1,6 @@
+2022-09-29 16:07:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ACCOUNT" not found (this database is empty); SQL statement:
+select account0_.username as username1_0_, account0_.password as password2_0_ from account account0_ [42104-214]
+2022-09-29 16:08:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ACCOUNT" not found (this database is empty); SQL statement:
+select account0_.username as username1_0_0_, account0_.password as password2_0_0_ from account account0_ where account0_.username=? [42104-214]

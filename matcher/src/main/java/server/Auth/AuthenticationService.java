@@ -14,7 +14,7 @@ public class AuthenticationService {
 
     public String authenticateUserCredentials(InputCredentials credentials) {
         ArrayList<User> userList = mockUserDatabase.cloneUserList();
-        userList.removeIf(user -> !user.getUsername().equals(credentials.username) || !user.getPassword().equals(credentials.password));
+        userList.removeIf(user -> !user.getUsername().equals(credentials.getUsername()) || !user.getPassword().equals(credentials.getPassword()));
         if (userList.size() == 1) return "" + userList.get(0).hashCode();
         else return "Invalid credentials";
     }

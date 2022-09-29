@@ -1,24 +1,26 @@
 package server.Auth;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
+@Data
+@AllArgsConstructor(staticName = "build")
+@NoArgsConstructor
 public class InputCredentials {
     @NotBlank
     @NotNull
     @Pattern(regexp = "^[\\S]+$", message = "no spaces")
-    String username;
+    private String username;
     @NotBlank
     @NotNull
     @Pattern(regexp = "^[\\S]+$", message = "no spaces")
-    String password;
-
-    public InputCredentials(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+    private String password;
 
     @Override
     public String toString() {
@@ -26,6 +28,14 @@ public class InputCredentials {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override

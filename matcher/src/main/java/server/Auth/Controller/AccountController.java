@@ -2,9 +2,11 @@ package server.Auth.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import server.Auth.InputCredentials;
 import server.Auth.dao.AccountRepository;
 import server.Auth.model.Account;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -12,17 +14,17 @@ import java.util.List;
 public class AccountController {
 
     @Autowired
-    private AccountRepository repository;
+    private AccountService accountService;
 
     @PostMapping("/save")
-    public String saveAccount(@RequestBody Account account) {
-        repository.save(account);
+    public String saveAccount(@RequestBody @Valid InputCredentials account) {
+        accountService.saveUser(account);
         return "user registered";
     }
 
     @GetMapping("/get")
     public List<Account> getAccount() {
 
-        return repository.findAll();
+        return accountService.getAccount();
     }
 }
