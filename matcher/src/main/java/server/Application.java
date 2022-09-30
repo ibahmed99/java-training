@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import server.Auth.Controller.AccountService;
+import server.Auth.model.Role;
 
 @SpringBootApplication
 public class Application {
@@ -26,7 +28,13 @@ public class Application {
             for (String beanName : beanNames) {
                 System.out.println(beanName);
             }
+        };
+    }
 
+    @Bean
+    CommandLineRunner run(AccountService accountService) {
+        return args -> {
+            accountService.saveRole(new Role(null, "USER"));
         };
     }
 

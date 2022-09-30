@@ -8,7 +8,7 @@ import server.Matcher.MatcherApplication;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(path = "api/v1/order")
+@RequestMapping(path = "/order")
 public class OrderbookController {
 
     private final OrderbookService orderbookService;
