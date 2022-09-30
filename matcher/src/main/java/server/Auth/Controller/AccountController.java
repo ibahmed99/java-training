@@ -16,15 +16,16 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @PostMapping("/save")
+    @PostMapping("/signup")
     public String saveAccount(@RequestBody @Valid InputCredentials account) {
-        accountService.saveUser(account);
+        Account newAccount = accountService.saveUser(account);
+        if (newAccount == null) return "user already exists";
         return "user registered";
     }
 
     @GetMapping("/get")
-    public List<Account> getAccount() {
-
-        return accountService.getAccount();
+    public List<Account> getAccounts() {
+        List<Account> accounts = accountService.getAccounts();
+        return accounts;
     }
 }

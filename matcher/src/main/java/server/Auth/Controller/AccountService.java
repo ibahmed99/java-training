@@ -9,6 +9,8 @@ import server.Auth.model.Account;
 
 import java.util.List;
 
+import static Hash.HashingFunction.hash;
+
 @Service
 public class AccountService {
 
@@ -16,13 +18,13 @@ public class AccountService {
     private AccountRepository repository;
 
     public Account saveUser(InputCredentials input) {
-        System.out.println(input.getUsername());
-        System.out.println(input.getPassword());
-        Account actualAccount = Account.build(input.getUsername(), input.getPassword());
+        if (repository.findByUsername(input.getUsername()) != null) return null;
+        Account actualAccount = Account.build(input.getUsername(), hash(input.getPassword()));
+
         return repository.save(actualAccount);
     }
 
-    public List<Account> getAccount() {
+    public List<Account> getAccounts() {
 
         return repository.findAll();
     }

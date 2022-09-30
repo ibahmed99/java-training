@@ -3,19 +3,25 @@ package server.Auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import server.Auth.dao.AccountRepository;
+import server.Auth.model.Account;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static Hash.HashingFunction.hash;
 
 @Service
 public class AuthenticationService {
 
     @Autowired
-    private MockUserDatabase mockUserDatabase;
+    private AccountRepository accountRepository;
 
     public String authenticateUserCredentials(InputCredentials credentials) {
-        ArrayList<User> userList = mockUserDatabase.cloneUserList();
-        userList.removeIf(user -> !user.getUsername().equals(credentials.getUsername()) || !user.getPassword().equals(credentials.getPassword()));
-        if (userList.size() == 1) return "" + userList.get(0).hashCode();
+        Account user = accountRepository.findByUsername(credentials.getUsername());
+        String hashedInputPassword = hash(credentials.getPassword());
+        if (user == null) return "User does not exist";
+        else if (user.getPassword().equals(hashedInputPassword)) return "" + user.hashCode();
         else return "Invalid credentials";
     }
 }

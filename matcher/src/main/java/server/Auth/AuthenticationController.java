@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(path = "api/v1/auth")
+@RequestMapping(path = "auth")
 public class AuthenticationController {
 
     @Autowired
@@ -21,11 +21,5 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody @Valid InputCredentials loginCredentials) {
         return ResponseEntity.ok(authenticationService.authenticateUserCredentials(loginCredentials));
-    }
-
-    @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody @Valid InputCredentials signupCredentials) {
-        
-        return ResponseEntity.ok("ok");
     }
 }
