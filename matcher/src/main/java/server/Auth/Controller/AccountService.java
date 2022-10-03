@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import server.Auth.InputCredentials;
@@ -29,16 +30,17 @@ public class AccountService implements UserDetailsService {
 
     @Autowired
     private AccountRepository accountRepository;
-
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Account saveUser(InputCredentials input) {
         if (accountRepository.findByUsername(input.getUsername()) != null) {
-            log.error("user does not exist");
+            log.error("user already exists");
             return null;
         }
-        Account actualAccount = Account.build(input.getUsername(), hash(input.getPassword()), new ArrayList<Role>());
+        Account actualAccount = Account.build(input.getUsername(), passwordEncoder.encode(input.getPassword()), new ArrayList<Role>());
         actualAccount.getRoles().add(roleRepository.findByName("USER"));
         return accountRepository.save(actualAccount);
     }

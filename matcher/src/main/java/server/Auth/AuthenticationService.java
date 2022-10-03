@@ -21,7 +21,7 @@ public class AuthenticationService {
         Account user = accountRepository.findByUsername(credentials.getUsername());
         String hashedInputPassword = hash(credentials.getPassword());
         if (user == null) return "User does not exist";
-        else if (user.getPassword().equals(hashedInputPassword)) return "" + user.hashCode();
+        else if (user.getPassword().equals(credentials.getPassword())) return "" + user.hashCode();
         else return "Invalid credentials";
     }
 }
