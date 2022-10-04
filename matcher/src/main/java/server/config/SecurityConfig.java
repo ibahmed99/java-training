@@ -20,7 +20,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import server.Auth.filter.CustomAuthenticationFilter;
+import server.Auth.filter.CustomAuthorizationFilter;
 
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -30,8 +32,6 @@ public class SecurityConfig {
 
     @Autowired
     private UserDetailsService userDetailsService;
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -55,10 +55,15 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(auth -> {
                     auth.antMatchers("/").permitAll();
-//                    auth.antMatchers("/order").hasRole("USER");
+                    auth.antMatchers("/signup").permitAll();
+                    auth.antMatchers("/login").permitAll();
+                    auth.antMatchers(GET, "/order").hasAnyAuthority("USER");
+                    auth.antMatchers(GET, "/getAccounts").hasAnyAuthority("ADMIN");
+                    auth.anyRequest().authenticated();
                 })
                 .httpBasic(withDefaults())
-                .addFilterBefore(new CustomAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class))), UsernamePasswordAuthenticationFilter.class)
+                .addFilter(new CustomAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class))))
+                .addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }

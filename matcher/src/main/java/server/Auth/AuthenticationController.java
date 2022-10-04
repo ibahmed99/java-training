@@ -18,8 +18,8 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody @Valid InputCredentials loginCredentials) {
-        return ResponseEntity.ok(authenticationService.authenticateUserCredentials(loginCredentials));
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<String> login(@RequestBody @Valid InputCredentials loginCredentials) {
+//        return ResponseEntity.ok(authenticationService.authenticateUserCredentials(loginCredentials));
+//    }
 }

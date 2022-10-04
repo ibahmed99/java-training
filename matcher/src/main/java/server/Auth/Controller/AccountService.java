@@ -40,6 +40,7 @@ public class AccountService implements UserDetailsService {
             log.error("user already exists");
             return null;
         }
+        log.info("saving user: {} to database", input.getUsername());
         Account actualAccount = Account.build(input.getUsername(), passwordEncoder.encode(input.getPassword()), new ArrayList<Role>());
         actualAccount.getRoles().add(roleRepository.findByName("USER"));
         return accountRepository.save(actualAccount);
@@ -48,6 +49,7 @@ public class AccountService implements UserDetailsService {
     public void addRoleToUser(String username, String roleName) {
         Account user = accountRepository.findByUsername(username);
         Role role = roleRepository.findByName(roleName);
+        log.info("adding role: {} to user: {}", role, username);
         user.getRoles().add(role);
     }
 

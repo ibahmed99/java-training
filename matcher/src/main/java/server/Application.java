@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import server.Auth.Controller.AccountService;
+import server.Auth.InputCredentials;
 import server.Auth.model.Role;
 
 @SpringBootApplication
@@ -22,6 +23,9 @@ public class Application {
         return args -> {
 //            long id = 1;
             accountService.saveRole(new Role(null, "USER"));
+            accountService.saveRole(new Role(null, "ADMIN"));
+            accountService.saveUser(InputCredentials.build("admin", "pass"));
+            accountService.addRoleToUser("admin", "ADMIN");
         };
     }
 

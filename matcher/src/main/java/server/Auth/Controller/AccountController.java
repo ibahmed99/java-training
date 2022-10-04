@@ -13,7 +13,6 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "account")
 public class AccountController {
 
     @Autowired
@@ -26,7 +25,7 @@ public class AccountController {
         return ResponseEntity.created(uri).body(accountService.saveUser(account));
     }
 
-    @GetMapping("/get")
+    @GetMapping("/getAccounts")
     public List<Account> getAccounts() {
         List<Account> accounts = accountService.getAccounts();
         return accounts;
