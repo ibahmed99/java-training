@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import server.Auth.InputCredentials;
-import server.Auth.dao.AccountRepository;
 import server.Auth.model.Account;
 
 import javax.validation.Valid;
