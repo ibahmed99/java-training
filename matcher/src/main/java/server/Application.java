@@ -25,6 +25,7 @@ public class Application {
             accountService.saveRole(new Role(null, "USER"));
             accountService.saveRole(new Role(null, "ADMIN"));
             accountService.saveUser(InputCredentials.build("admin", "pass"));
+            accountService.saveUser(InputCredentials.build("ibrahim", "password"));
             accountService.addRoleToUser("admin", "ADMIN");
         };
     }
