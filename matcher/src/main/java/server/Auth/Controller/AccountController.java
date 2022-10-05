@@ -20,7 +20,6 @@ public class AccountController {
     @PostMapping("/signup")
     public ResponseEntity<Account> saveAccount(@RequestBody @Valid InputCredentials account) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/account/signup").toUriString());
-//        Account newAccount = accountService.saveUser(account);
         return ResponseEntity.created(uri).body(accountService.saveUser(account));
     }
 

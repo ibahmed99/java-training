@@ -1,9 +1,9 @@
 package server.Orderbook;
 
 public class PrivateOrder implements Comparable<PrivateOrder> {
-    final public double price;
     final public String action;
     final public long time;
+    public double price;
     //    final String id; needs to be randomly generated
     public double quantity;
     public String coin = "BTC";
@@ -16,8 +16,20 @@ public class PrivateOrder implements Comparable<PrivateOrder> {
         this.coin = order.coin;
     }
 
+    public PrivateOrder(String action, long time, double price, double quantity, String coin) {
+        this.price = price;
+        this.quantity = quantity;
+        this.action = action;
+        this.time = time;
+        this.coin = coin;
+    }
+
     public double getPrice() {
         return this.price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public double getQuantity() {
