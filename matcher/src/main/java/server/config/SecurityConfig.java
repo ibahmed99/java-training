@@ -65,7 +65,8 @@ public class SecurityConfig {
                     auth.antMatchers("/").permitAll();
                     auth.antMatchers("/signup").permitAll();
                     auth.antMatchers("/login").permitAll();
-                    auth.antMatchers(GET, "/order").permitAll();//.hasAnyAuthority("USER");
+                    auth.antMatchers(GET, "/trades").hasAnyAuthority("USER");
+                    auth.antMatchers(GET, "/order").hasAnyAuthority("USER");
                     auth.antMatchers(GET, "/getAccounts").hasAnyAuthority("ADMIN");
                     auth.anyRequest().authenticated();
                 })

@@ -84,17 +84,17 @@ public class Matcher {
 
         Trade trade = new Trade(coin);
 
-        if (newOrder.action.equals("buy")) trade.price = newOrder.price;
-        else trade.price = existingOrder.price;
+        if (newOrder.action.equals("buy")) trade.setPrice(newOrder.price);
+        else trade.setPrice(existingOrder.price);
 
         if (newOrderLargerQuant) {
-            trade.quantity = existingOrder.quantity;
+            trade.setQuantity(existingOrder.quantity);
             trades.add(trade);
             Order order = newOrder.clone();
             order.quantity = newOrder.quantity - existingOrder.quantity;
             return new MarketUpdate(true, existingOrder, order);
         } else /* if (existingOrderLargerQuant || sameQuant) */ {
-            trade.quantity = newOrder.quantity;
+            trade.setQuantity(newOrder.quantity);
             trades.add(trade);
             Order order = existingOrder.clone();
             order.quantity = existingOrder.quantity - newOrder.quantity;

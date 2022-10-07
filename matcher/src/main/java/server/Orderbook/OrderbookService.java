@@ -35,11 +35,9 @@ public class OrderbookService {
 
     public PrivateOrderbook aggregateOrderbook(double value) {
         PrivateOrderbook privateOrderbook = matcherApplication.getPrivateExistingOrders();
-        System.out.println(privateOrderbook);
         privateOrderbook.sells = this.aggregateList(privateOrderbook.sells, "sell", value, "BTC");
         privateOrderbook.buys = this.aggregateList(privateOrderbook.buys, "sell", value, "BTC");
         privateOrderbook.sortLists();
-        System.out.println(privateOrderbook);
 
         return privateOrderbook;
     }

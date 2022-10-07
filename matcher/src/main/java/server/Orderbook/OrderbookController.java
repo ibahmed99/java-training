@@ -10,8 +10,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import server.Matcher.MatcherApplication;
+import server.Matcher.Trade;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(path = "order")
@@ -49,7 +51,6 @@ public class OrderbookController {
         DecodedJWT decodedJWT = verifier.verify(token);
         String user = decodedJWT.getSubject();
         newOrder.setAccount(user);
-        System.out.println(newOrder);
         orderbookService.processNewOrder(newOrder);
         return ResponseEntity.ok(matcherApplication.getPrivateExistingOrders());
     }
@@ -57,5 +58,10 @@ public class OrderbookController {
     @GetMapping("/aggregated")
     public ResponseEntity<PrivateOrderbook> getAggregatedOrderbook(@RequestParam Double aggregationValue) {
         return ResponseEntity.ok(orderbookService.aggregateOrderbook(aggregationValue));
+    }
+
+    @GetMapping("/trades")
+    public ResponseEntity<ArrayList<Trade>> getTrades() {
+        return ResponseEntity.ok(matcherApplication.getTrades());
     }
 }
