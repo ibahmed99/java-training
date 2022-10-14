@@ -27,10 +27,10 @@ class ApplicationTests {
 
 
     @Test
-    public void greetingShouldReturnMessage() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
-                String.class)).contains("hello CoinFake user");
-    }
+//    public void greetingShouldReturnMessage() throws Exception {
+//        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
+//                String.class)).contains("hello CoinFake user");
+//    }
 
 //    @Test
 //    public void gettingOrderbookShouldReturnCorrectJSON() throws Exception {
