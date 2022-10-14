@@ -22,5 +22,10 @@ public class WebController {
         return "hello CoinFake user";
     }
 
+    @GetMapping("/ci")
+    public String greeting() {
+        return "CI/CD works!";
+    }
+
 
 }
