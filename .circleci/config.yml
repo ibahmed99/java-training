@@ -19,7 +19,7 @@ jobs:
     steps:
       - run:
           name: Build Server
-          command: ./gradlew build
+          command: gradlew build
       - checkout:
           path: ~/java-training
       - setup_remote_docker:
