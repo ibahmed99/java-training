@@ -22,7 +22,7 @@ public class WebController {
         return "hello CoinFake user";
     }
 
-    @GetMapping("/ci")
+    @GetMapping("/cd")
     public String test() {
         return "CI/CD works!";
     }

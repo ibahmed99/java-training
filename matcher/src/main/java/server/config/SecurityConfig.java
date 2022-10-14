@@ -63,6 +63,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(auth -> {
                     auth.antMatchers("/").permitAll();
+                    auth.antMatchers("/cd").permitAll();
                     auth.antMatchers("/signup").permitAll();
                     auth.antMatchers("/login").permitAll();
                     auth.antMatchers(GET, "/trades").hasAnyAuthority("USER");
