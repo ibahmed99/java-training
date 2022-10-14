@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - MockApplicationTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>MockApplicationTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/server.html">server</a> &gt; MockApplicationTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.004s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">shouldReturnDefaultMessage()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2022-10-14 10:51:00.189  INFO 1092 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [server.MockApplicationTests], using SpringBootContextLoader
+2022-10-14 10:51:00.190  INFO 1092 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [server.MockApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-10-14 10:51:00.190  INFO 1092 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [server.MockApplicationTests]: MockApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-10-14 10:51:00.200  INFO 1092 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration server.Application for test class server.MockApplicationTests
+2022-10-14 10:51:00.201  INFO 1092 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-10-14 10:51:00.202  INFO 1092 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6899f5c6, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2bec815f, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@fae1fe5, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@3e92ddfc, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1982382d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@56abb43b, org.springframework.test.context.transaction.TransactionalTestExecutionListener@2905d83c, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1508ddd, org.springframework.test.context.event.EventPublishingTestExecutionListener@99b8e8a, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@29ae9ee, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5d915b9, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@e25eba, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@55d87ff2, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@d8393e, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@4de18041]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.3)
+
+2022-10-14 10:51:00.227  INFO 1092 --- [    Test worker] server.MockApplicationTests              : Starting MockApplicationTests using Java 15.0.2 on WS02611 with PID 1092 (started by iahmed in C:\Users\iahmed\Documents\Training-local\java-training\matcher)
+2022-10-14 10:51:00.227  INFO 1092 --- [    Test worker] server.MockApplicationTests              : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2022-10-14 10:51:00.381  INFO 1092 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-10-14 10:51:00.395  INFO 1092 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 2 JPA repository interfaces.
+2022-10-14 10:51:00.508  INFO 1092 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2022-10-14 10:51:00.509  INFO 1092 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2022-10-14 10:51:00.522  INFO 1092 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-10-14 10:51:00.527  INFO 1092 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-10-14 10:51:00.565  INFO 1092 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-10-14 10:51:00.565  INFO 1092 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-10-14 10:51:00.720  INFO 1092 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6c445886, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@63e75a00, org.springframework.security.web.context.SecurityContextPersistenceFilter@57dd7c5, org.springframework.security.web.header.HeaderWriterFilter@53eba4aa, org.springframework.web.filter.CorsFilter@568eae86, org.springframework.security.web.authentication.logout.LogoutFilter@60295c93, server.Auth.filter.CustomAuthorizationFilter@434b7092, server.Auth.filter.CustomAuthenticationFilter@d059015, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@25b60cc1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@73524bbb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7d126f8f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@54ebecef, org.springframework.security.web.session.SessionManagementFilter@7dc17480, org.springframework.security.web.access.ExceptionTranslationFilter@79f1f504, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@67fa44ce]
+2022-10-14 10:51:00.807  WARN 1092 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-10-14 10:51:00.887  INFO 1092 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2022-10-14 10:51:01.047  INFO 1092 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-10-14 10:51:01.047  INFO 1092 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-10-14 10:51:01.048  INFO 1092 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2022-10-14 10:51:01.055  INFO 1092 --- [    Test worker] server.MockApplicationTests              : Started MockApplicationTests in 0.849 seconds (JVM running for 6.184)
+2022-10-14 10:51:01.057  INFO 1092 --- [    Test worker] server.Auth.Controller.AccountService    : saving role Role(id=null, name=USER) to database
+2022-10-14 10:51:01.061  INFO 1092 --- [    Test worker] server.Auth.Controller.AccountService    : saving role Role(id=null, name=ADMIN) to database
+2022-10-14 10:51:01.064  INFO 1092 --- [    Test worker] server.Auth.Controller.AccountService    : saving user: admin to database
+2022-10-14 10:51:01.139  INFO 1092 --- [    Test worker] server.Auth.Controller.AccountService    : saving user: ibrahim to database
+2022-10-14 10:51:01.204  INFO 1092 --- [    Test worker] server.Auth.Controller.AccountService    : adding role: Role(id=2, name=ADMIN) to user: admin
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 6.9.1</a> at 14 Oct 2022, 10:51:01</p>
+</div>
+</div>
+</body>
+</html>

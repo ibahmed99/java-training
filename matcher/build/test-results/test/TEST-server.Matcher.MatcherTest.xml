@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="server.Matcher.MatcherTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-10-14T09:51:00" hostname="WS02611" time="0.013">
+  <properties/>
+  <testcase name="matcherWorksWithSellOrder()" classname="server.Matcher.MatcherTest" time="0.007"/>
+  <testcase name="sellOrderTradesWithMultipleBuyOrdersDoesNotFulfill()" classname="server.Matcher.MatcherTest" time="0.0"/>
+  <testcase name="sellOrderWithSameQuantityAsExistingBuyOrderFulfills()" classname="server.Matcher.MatcherTest" time="0.001"/>
+  <testcase name="sellOrderTradesWithMultipleBuyOrdersFulfills()" classname="server.Matcher.MatcherTest" time="0.0"/>
+  <testcase name="removingZeroQuantBuyOrder()" classname="server.Matcher.MatcherTest" time="0.0"/>
+  <testcase name="buyOrderTradesWithMultipleSellOrdersFulfills()" classname="server.Matcher.MatcherTest" time="0.001"/>
+  <testcase name="matcherWorksWithBuyOrder()" classname="server.Matcher.MatcherTest" time="0.0"/>
+  <testcase name="buyOrderWithSameQuantityAsExistingSellOrderFulfills()" classname="server.Matcher.MatcherTest" time="0.0"/>
+  <testcase name="buyOrderTradesWithMultipleSellOrdersDoesNotFulfill()" classname="server.Matcher.MatcherTest" time="0.001"/>
+  <testcase name="removingZeroQuantSellOrder()" classname="server.Matcher.MatcherTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
