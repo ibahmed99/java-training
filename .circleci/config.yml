@@ -3,6 +3,7 @@ workflows:
   test:
     jobs:
       - test_ci
+      - build_server
       - deploy_backend
 
 jobs:
@@ -12,14 +13,29 @@ jobs:
     steps:
       - run: echo "running ci cd"
 
+  build_server:
+    working_directory: ~/java-training/matcher
+    docker:
+      - image: circleci/openjdk:15
+    steps:
+      - checkout:
+          path: ~/java-training
+      - run:
+          name: Build Server
+          command: gradle build
+      - persist_to_workspace:
+          root: ~/java-training
+          paths:
+            - matcher
+
+
+
   deploy_backend:
     working_directory: ~/java-training/matcher
     docker:
       - image: circleci/node:10.15.1
     steps:
-      - run:
-          name: Build Server
-          command: gradlew build
+
       - checkout:
           path: ~/java-training
       - setup_remote_docker:
