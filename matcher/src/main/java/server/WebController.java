@@ -23,7 +23,7 @@ public class WebController {
     }
 
     @GetMapping("/ci")
-    public String greeting() {
+    public String test() {
         return "CI/CD works!";
     }
 
