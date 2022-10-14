@@ -1,6 +1,6 @@
 FROM openjdk:15-alpine
 
-ADD build/libs/*.jar matcherServer.jar/
+ADD build/libs/matcher-0.0.1-SNAPSHOT.jar matcherServer.jar
 
 EXPOSE 8080
 
