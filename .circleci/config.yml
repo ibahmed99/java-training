@@ -4,7 +4,9 @@ workflows:
     jobs:
       - test_ci
       - build_server
-      - deploy_backend
+      - deploy_server:
+          requires:
+            - build_server
 
 jobs:
   test_ci:
@@ -30,7 +32,7 @@ jobs:
 
 
 
-  deploy_backend:
+  deploy_server:
     working_directory: ~/java-training/matcher
     docker:
       - image: circleci/node:10.15.1
