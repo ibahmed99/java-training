@@ -1,0 +1,49 @@
+version: 2.1
+workflows:
+  test:
+    jobs:
+      - test_ci
+      - deploy_backend
+
+jobs:
+  test_ci:
+    docker:
+      - image: circleci/node:10.15.1
+    steps:
+      - run: echo "running ci cd"
+
+  deploy_backend:
+    working_directory: ~/java-training/matcher
+    docker:
+      - image: circleci/node:10.15.1
+    steps:
+      - checkout:
+          path: ~/java-training
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Build Docker Image
+          command: docker build -t iahmed74/matcherjavaserver ./
+      - run:
+          name: Login to AWS
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y python-pip python-dev
+            sudo pip install awscli
+
+            aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 318013158229.dkr.ecr.eu-west-2.amazonaws.com
+      - run:
+          name: Tag Docker and push Image
+          command: |
+            docker tag iahmed74/matcherjavaserver 318013158229.dkr.ecr.eu-west-2.amazonaws.com/iahmed-matcher-java-backend:latest
+            docker push 318013158229.dkr.ecr.eu-west-2.amazonaws.com/iahmed-matcher-java-backend:latest
+      - run:
+          name: Restart Task Definition
+          command: |
+            OLD_TASK_ID=$(aws ecs list-tasks --region eu-west-2 --cluster iahmed-matcher --desired-status RUNNING --family iahmed-matcher-java-backend-task | egrep "task/" | sed -E "s/.*task\/(.*)\"/\1/")
+            aws ecs stop-task --region eu-west-2 --cluster iahmed-matcher --task ${OLD_TASK_ID}
+            aws ecs run-task --region eu-west-2 --cluster iahmed-matcher --task-definition iahmed-matcher-java-backend-task:8
+      - persist_to_workspace:
+          root: ~/java-training
+          paths:
+            - matcher
