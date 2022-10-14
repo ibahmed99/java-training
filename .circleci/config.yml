@@ -19,6 +19,9 @@ jobs:
     steps:
       - checkout:
           path: ~/java-training
+      - run:
+          name: Build Server
+          command: ./gradlew build
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
