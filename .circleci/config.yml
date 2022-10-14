@@ -63,7 +63,7 @@ jobs:
           command: |
             OLD_TASK_ID=$(aws ecs list-tasks --region eu-west-2 --cluster iahmed-matcher --desired-status RUNNING --family iahmed-matcher-java-backend-task | egrep "task/" | sed -E "s/.*task\/(.*)\"/\1/")
             aws ecs stop-task --region eu-west-2 --cluster iahmed-matcher --task ${OLD_TASK_ID}
-            aws ecs run-task --region eu-west-2 --cluster iahmed-matcher --task-definition iahmed-matcher-java-backend-task:8
+            aws ecs run-task --region eu-west-2 --cluster iahmed-matcher --task-definition iahmed-matcher-java-backend-task:9
       - persist_to_workspace:
           root: ~/java-training
           paths:
