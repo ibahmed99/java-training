@@ -7,6 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import server.Auth.Controller.AccountService;
+import server.Auth.InputCredentials;
+import server.Auth.model.Role;
 
 @SpringBootApplication
 public class Application {
@@ -16,17 +19,14 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+    CommandLineRunner run(AccountService accountService) {
         return args -> {
-
-            System.out.println("Let's inspect the beans provided by Spring Boot:");
-
-            String[] beanNames = ctx.getBeanDefinitionNames();
-            Arrays.sort(beanNames);
-            for (String beanName : beanNames) {
-                System.out.println(beanName);
-            }
-
+//            long id = 1;
+            accountService.saveRole(new Role(null, "USER"));
+            accountService.saveRole(new Role(null, "ADMIN"));
+            accountService.saveUser(InputCredentials.build("admin", "pass"));
+            accountService.saveUser(InputCredentials.build("ibrahim", "password"));
+            accountService.addRoleToUser("admin", "ADMIN");
         };
     }
 

@@ -13,7 +13,7 @@ public class MatcherApplication {
 
     public MatcherApplication() {
         this.existingOrders = new Orderbook();
-        this.trades = new ArrayList<Trade>();
+        this.trades = new ArrayList<>();
     }
 
     public Orderbook getExistingOrders() {
@@ -25,6 +25,6 @@ public class MatcherApplication {
     }
 
     public ArrayList<Trade> getTrades() {
-        return trades;
+        return this.trades;
     }
 }

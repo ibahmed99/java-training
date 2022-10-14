@@ -8,16 +8,16 @@ public class Order implements Comparable<Order> {
     @Pattern(regexp = "^(buy|sell)$", message = "Order must be either buy or sell")
     final public String action;
     final public long time;
-    //    final String id; needs to be randomly generated
-    @NotNull(message = "account can not be null")
-    @NotBlank(message = "account can not be blank")
-    final private String account;
     @Min(0)
     public double quantity;
     @NotNull(message = "coin can not be null")
     @NotBlank(message = "coin can not be blank")
     @Pattern(regexp = "^(BTC|ETH|DOGE)$", message = "invalid or unsupported coin")
     public String coin = "BTC";
+    //    final String id; needs to be randomly generated
+//    @NotNull(message = "account can not be null")
+//    @NotBlank(message = "account can not be blank")
+    private String account;
 
 
     public Order(String account, double price, double quantity, String action, long time, String coin) {
@@ -35,6 +35,10 @@ public class Order implements Comparable<Order> {
 
     public String getAccount() {
         return this.account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public double getPrice() {
@@ -66,7 +70,7 @@ public class Order implements Comparable<Order> {
     public String toString() {
         return "Order{" +
                 "account=" + account +
-                "price=" + price +
+                ", price=" + price +
                 ", action='" + action + '\'' +
                 ", time=" + time +
                 ", quantity=" + quantity +
