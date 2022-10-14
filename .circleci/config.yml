@@ -24,7 +24,7 @@ jobs:
           path: ~/java-training
       - run:
           name: Build Server
-          command: gradle build
+          command: ./gradlew build
       - persist_to_workspace:
           root: ~/java-training
           paths:
