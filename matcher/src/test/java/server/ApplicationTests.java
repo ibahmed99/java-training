@@ -26,7 +26,7 @@ class ApplicationTests {
     }
 
 
-    @Test
+//    @Test
 //    public void greetingShouldReturnMessage() throws Exception {
 //        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
 //                String.class)).contains("hello CoinFake user");
