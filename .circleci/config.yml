@@ -17,11 +17,11 @@ jobs:
     docker:
       - image: circleci/node:10.15.1
     steps:
-      - checkout:
-          path: ~/java-training
       - run:
           name: Build Server
           command: ./gradlew build
+      - checkout:
+          path: ~/java-training
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
