@@ -11,14 +11,14 @@ workflows:
 jobs:
   test_ci:
     docker:
-      - image: circleci/node:10.15.1
+      - image: circleci/openjdk:15
     steps:
       - run: echo "running ci cd"
 
   build_server:
     working_directory: ~/java-training/matcher
     docker:
-      - image: circleci/openjdk:15
+      - image: circleci/openjdk:16
     steps:
       - checkout:
           path: ~/java-training
