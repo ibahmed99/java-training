@@ -14,8 +14,8 @@ server/Matcher/Trade.java
  server.Matcher.Trade
 server/Matcher/Matcher.java
  server.Matcher.Matcher
-server/config/SecurityConfig.java
- server.config.SecurityConfig
+server/Auth/filter/CustomAuthenticationFilter.java
+ server.Auth.filter.CustomAuthenticationFilter
 server/Auth/Controller/AccountService.java
  server.Auth.Controller.AccountService
 server/Auth/model/Account.java
@@ -24,8 +24,8 @@ server/Application.java
  server.Application
 server/Auth/model/Role.java
  server.Auth.model.Role
-server/WebController.java
- server.WebController
+server/Auth/filter/CustomAuthorizationFilter.java
+ server.Auth.filter.CustomAuthorizationFilter
 server/Orderbook/PrivateOrder.java
  server.Orderbook.PrivateOrder
 server/Matcher/MatcherApplication.java
@@ -46,7 +46,7 @@ server/Orderbook/ApplicationExceptionHandler.java
  server.Orderbook.ApplicationExceptionHandler
 server/Auth/AuthenticationController.java
  server.Auth.AuthenticationController
-server/Auth/filter/CustomAuthorizationFilter.java
- server.Auth.filter.CustomAuthorizationFilter
-server/Auth/filter/CustomAuthenticationFilter.java
- server.Auth.filter.CustomAuthenticationFilter
+server/config/SecurityConfig.java
+ server.config.SecurityConfig
+server/WebController.java
+ server.WebController

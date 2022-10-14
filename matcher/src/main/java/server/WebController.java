@@ -24,7 +24,7 @@ public class WebController {
 
     @GetMapping("/cd")
     public String test() {
-        return "CI/CD works!";
+        return "CI/CD actually works!";
     }
 
 
