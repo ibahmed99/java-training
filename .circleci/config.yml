@@ -18,7 +18,7 @@ jobs:
   build_server:
     working_directory: ~/java-training/matcher
     docker:
-      - image: circleci/openjdk:8
+      - image: circleci/openjdk:15.0.2
     steps:
       - checkout:
           path: ~/java-training
